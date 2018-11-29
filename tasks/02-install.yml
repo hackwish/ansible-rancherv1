@@ -1,7 +1,7 @@
 ---
 - name: pull Rancher/server container
   docker_image:
-    name: rancher/server
+    name: rancher/server:latest
   when: docker_installed is success
 
 - name: Create mount volume directories for persistent rancher server data
@@ -14,7 +14,7 @@
 - name: Run Rancher server
   docker_container:
     name: rancher
-    image: rancher/server
+    image: rancher/server:latest
     restart_policy: unless-stopped
     ports:
      - "8080:8080"
