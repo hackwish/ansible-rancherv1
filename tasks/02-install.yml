@@ -1,11 +1,11 @@
 ---
-- name: pull Rancher/server container
-  docker_image:
-    name: rancher/server:latest
-  when: docker_installed is success
+# - name: pull Rancher/server container
+#   docker_image:
+#     name: rancher/server:latest
+#   when: docker_installed is success
 
 - name: Create mount volume directories for persistent rancher server data
-  file: path={{ item.path }} state=directory mode="a+rw"
+  file: path={{ item.path }} state=directory mode="755"
   with_items:
       - { path: '/opt/rancher/lib/mysql' }
       - { path: '/opt/rancher/log/mysql' }

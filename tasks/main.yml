@@ -7,7 +7,7 @@
   tags: rancher-install
 
 - include: 03-cli_reg.yml
- tags: rancher_cli_register-install
+  tags: rancher_cli_register-install
 
 # - include: 04-agent.yml
 #   tags: rancher_agent-install
