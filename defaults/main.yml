@@ -6,6 +6,8 @@
 rancher_server: "127.0.0.1"
 rancher_port: "8080"
 
+rancher_server_db: "127.0.0.1"
+
 admin_user: "{{ RANCHER_ADMIN_USER }}"
 admin_pass: "{{ RANCHER_ADMIN_PASS }}"
 api_user: "{{ RANCHER_API_USER }}"
