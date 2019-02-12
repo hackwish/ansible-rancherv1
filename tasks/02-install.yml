@@ -1,14 +1,9 @@
 ---
-# - name: pull Rancher/server container
-#   docker_image:
-#     name: rancher/server:latest
-#   when: docker_installed is success
-
 - name: Create mount volume directories for persistent rancher server data
   file: path={{ item.path }} state=directory mode="755"
   with_items:
-      - { path: '/opt/rancher/lib/mysql' }
-      - { path: '/opt/rancher/log/mysql' }
+      # - { path: '/opt/rancher/lib/mysql' }
+      # - { path: '/opt/rancher/log/mysql' }
       - { path: '/opt/rancher/lib/cattle' }
 
 - name: Run Rancher server
@@ -22,12 +17,16 @@
       - "500:500/udp"
       - "4500:4500/udp"
     env:
-      db-host: "{{ rancher_server_db }}"
+      CATTLE_DB_CATTLE_MYSQL_HOST: "{{ rancher_server_db }}"
+      CATTLE_DB_CATTLE_USERNAME: "{{ rancher_user_db }}"
+      CATTLE_DB_CATTLE_PASSWORD: "{{ rancher_pass_db }}"
+      CATTLE_DB_CATTLE_MYSQL_NAME: "{{ rancher_name_db }}"
+      CATTLE_DB_CATTLE_MYSQL_PORT: "{{ rancher_port_db }}"
 
     volumes:
       - /opt/rancher/lib/cattle:/var/lib/cattle
-      - /opt/rancher/lib/mysql:/var/lib/mysql
-      - /opt/rancher/log/mysql:/var/log/mysql
+      # - /opt/rancher/lib/mysql:/var/lib/mysql
+      # - /opt/rancher/log/mysql:/var/log/mysql
 
 - name: Wait for the Rancher server to start
   action: command docker logs rancher
