@@ -33,4 +33,4 @@
   register: rancher_logs
   until: rancher_logs.stdout.find("Listening on") != -1
   retries: 30
-  delay: 10
+  delay: 30
